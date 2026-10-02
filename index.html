@@ -565,9 +565,16 @@
     var applyHeaderScroll = function(){
       var y = Math.max(0, window.scrollY);
       header.classList.toggle('scrolled', y > 4);
+      var doc = document.documentElement;
+      var maxScroll = doc.scrollHeight - doc.clientHeight;
+      var nearBottom = maxScroll - y < 32;
       var delta = y - lastY;
       if (y <= 72) {
         header.classList.remove('compact');
+      } else if (nearBottom) {
+        // Shrinking the (in-flow, sticky) header changes document height,
+        // which near the bottom makes the browser re-clamp scrollY and
+        // re-fire 'scroll' — a feedback loop. Freeze state here instead.
       } else if (delta > 8) {
         header.classList.add('compact');
       } else if (delta < -8) {
