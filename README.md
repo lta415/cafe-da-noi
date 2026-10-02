@@ -1,7 +1,10 @@
 # Café Da Noi – Website
 
 ## Status
-Projekt-Setup in Vorbereitung. Assets (Logo/Fotos/Speisekarte) werden gesammelt, bevor das eigentliche Website-Gerüst aufgesetzt wird.
+Erste Version live auf GitHub Pages (siehe unten). Speisekarte, Fotos und Öffnungszeiten fehlen noch.
+
+## Quelle für Kontaktdaten
+Telefon, E-Mail und Service-Infos wurden aus der bestehenden temporären Seite übernommen: https://da-noi-tino-e-toni.eatbu.com (Öffnungszeiten und Speisekarte dort leider nur dynamisch geladen und nicht auslesbar).
 
 ## Entscheidungen
 - **Pflege:** Statische Seite, Inhalte werden vom Entwickler gepflegt (kein CMS)
@@ -20,8 +23,8 @@ Projekt-Setup in Vorbereitung. Assets (Logo/Fotos/Speisekarte) werden gesammelt,
 - [ ] Speisekarte ablegen in `public/assets/speisekarte/`
 - [ ] Fotos ablegen in `public/assets/fotos/`
 - [x] Adresse (Glißmannweg 5, 22457 Hamburg)
-- [ ] Telefonnummer, E-Mail
-- [ ] Öffnungszeiten
+- [x] Telefonnummer, E-Mail (aus temporärer Seite übernommen)
+- [ ] Öffnungszeiten (auf temporärer Seite nicht auslesbar, bitte von Tino/Toni erfragen)
 - [ ] Technischer Unterbau für Reservierung (Formular + Backend für Bestätigungs-Workflow + E-Mail-Versand)
 
 ## Hosting
