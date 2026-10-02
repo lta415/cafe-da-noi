@@ -249,6 +249,13 @@
   footer a{ text-decoration: none; }
   footer a.link{ color: var(--espresso-ink); text-decoration: underline; text-decoration-color: var(--espresso-line); text-underline-offset: 3px; }
   footer a.link:hover{ text-decoration-color: var(--gold); }
+  .hours{ list-style:none; margin:0; padding:0; }
+  .hours li{
+    display:flex; justify-content:space-between; gap:12px;
+    padding-block: 5px; font-size:.9rem;
+  }
+  .hours .d{ color: var(--espresso-soft); }
+  .hours .t{ font-variant-numeric: tabular-nums; color: var(--espresso-ink); font-weight:500; }
   .foot-bottom{
     margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--espresso-line);
     display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
@@ -488,7 +495,15 @@
       </div>
       <div>
         <h3>Öffnungszeiten</h3>
-        <p class="pending">Öffnungszeiten folgen</p>
+        <ul class="hours">
+          <li><span class="d">Montag</span><span class="t">09:00–20:00</span></li>
+          <li><span class="d">Dienstag</span><span class="t">09:00–20:00</span></li>
+          <li><span class="d">Mittwoch</span><span class="t">09:00–20:00</span></li>
+          <li><span class="d">Donnerstag</span><span class="t">09:00–22:00</span></li>
+          <li><span class="d">Freitag</span><span class="t">09:00–22:00</span></li>
+          <li><span class="d">Samstag</span><span class="t">10:00–22:00</span></li>
+          <li><span class="d">Sonntag</span><span class="t">Geschlossen</span></li>
+        </ul>
       </div>
       <div>
         <h3>Kontakt</h3>

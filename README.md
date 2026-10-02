@@ -24,7 +24,7 @@ Telefon, E-Mail und Service-Infos wurden aus der bestehenden temporären Seite �
 - [ ] Fotos ablegen in `public/assets/fotos/`
 - [x] Adresse (Glißmannweg 5, 22457 Hamburg)
 - [x] Telefonnummer, E-Mail (aus temporärer Seite übernommen)
-- [ ] Öffnungszeiten (auf temporärer Seite nicht auslesbar, bitte von Tino/Toni erfragen)
+- [x] Öffnungszeiten (per Screenshot von der temporären Seite übermittelt)
 - [ ] Technischer Unterbau für Reservierung (Formular + Backend für Bestätigungs-Workflow + E-Mail-Versand)
 
 ## Hosting
