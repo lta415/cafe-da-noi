@@ -560,19 +560,29 @@
 <script>
   (function(){
     var header = document.getElementById('site-header');
-    var lastY = window.scrollY;
-    var onScroll = function(){
-      var y = window.scrollY;
+    var lastY = Math.max(0, window.scrollY);
+    var headerTicking = false;
+    var applyHeaderScroll = function(){
+      var y = Math.max(0, window.scrollY);
       header.classList.toggle('scrolled', y > 4);
-      if (y > lastY && y > 72) {
+      var delta = y - lastY;
+      if (y <= 72) {
+        header.classList.remove('compact');
+      } else if (delta > 8) {
         header.classList.add('compact');
-      } else if (y < lastY || y <= 72) {
+      } else if (delta < -8) {
         header.classList.remove('compact');
       }
-      lastY = y;
+      if (Math.abs(delta) > 2) lastY = y;
+      headerTicking = false;
+    };
+    var onScroll = function(){
+      if (headerTicking) return;
+      headerTicking = true;
+      requestAnimationFrame(applyHeaderScroll);
     };
     document.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    applyHeaderScroll();
 
     var form = document.getElementById('reservation-form');
     var confirmEl = document.getElementById('r-confirm');
