@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Café Da Noi — Italienisches Café in Hamburg</title>
+<meta name="description" content="Café Da Noi von Tino und Toni: italienischer Espresso, hausgemachte Dolci und Tischreservierung. Glißmannweg 5, 22457 Hamburg.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,500&family=Caveat:wght@500;600;700&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --cream: #F4EEE0;
+    --cream-raised: #FBF7EC;
+    --cream-sunken: #EAE1CB;
+    --ink: #2B241D;
+    --ink-soft: #5E5444;
+    --gold: #9C7A3E;
+    --gold-deep: #7C5D2A;
+    --pine: #3B5440;
+    --wine: #7C2E2A;
+    --line: #DED0AE;
+    --shadow: 20 14% 20%;
+    --espresso: #221811;
+    --espresso-raised: #2C2015;
+    --espresso-ink: #F3ECDD;
+    --espresso-soft: #C7B89C;
+    --espresso-line: rgba(243,236,221,.16);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --cream: #211B14; --cream-raised: #2A2319; --cream-sunken: #19140E;
+      --ink: #F1E7D3; --ink-soft: #C4B79C;
+      --gold: #D4AC6E; --gold-deep: #E6C689;
+      --pine: #74A17D; --wine: #D08077; --line: #3C3225;
+    }
+  }
+  :root[data-theme="dark"]{
+    --cream: #211B14; --cream-raised: #2A2319; --cream-sunken: #19140E;
+    --ink: #F1E7D3; --ink-soft: #C4B79C;
+    --gold: #D4AC6E; --gold-deep: #E6C689;
+    --pine: #74A17D; --wine: #D08077; --line: #3C3225;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior: auto; } }
+
+  body{
+    margin:0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Figtree', ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  img{ max-width: 100%; display:block; }
+  a{ color: inherit; }
+  h1,h2,h3{ font-family: 'Fraunces', Georgia, serif; text-wrap: balance; margin: 0; color: var(--ink); }
+  .eyebrow{
+    font-family: 'Figtree', sans-serif;
+    font-size: .76rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--gold-deep); font-weight: 600;
+  }
+  .script{ font-family: 'Caveat', cursive; }
+  .wrap{ max-width: 1100px; margin: 0 auto; padding-inline: 20px; }
+  .measure{ max-width: 62ch; }
+
+  .motif{ display:flex; align-items:center; gap:12px; }
+  .motif .bar{ height:2px; width:46px; border-radius:2px; }
+  .motif .bar.pine{ background: var(--pine); }
+  .motif .bar.wine{ background: var(--wine); }
+  .motif .mark{ color: var(--gold); font-size: 1rem; line-height:1; }
+  .motif.on-dark .bar.pine{ background: #6FA178; }
+  .motif.on-dark .bar.wine{ background: #D4897E; }
+  .motif.on-dark .mark{ color: var(--espresso-ink); }
+
+  header{
+    position: sticky; top:0; z-index: 20;
+    background: color-mix(in srgb, var(--cream) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .3s ease, background .3s ease;
+  }
+  header.scrolled{ border-bottom-color: var(--line); }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding-block: 16px; gap: 16px; flex-wrap: wrap; }
+  .wordmark{ font-family:'Fraunces', serif; font-weight:600; font-size:1.3rem; letter-spacing:.01em; white-space:nowrap; }
+  .wordmark em{ font-style: italic; font-weight: 500; color: var(--gold-deep); }
+  .navlinks{ display:flex; gap:28px; list-style:none; margin:0; padding:0; flex-wrap:wrap; }
+  .navlinks a{
+    text-decoration:none; font-size:.92rem; font-weight:500; color: var(--ink-soft);
+    padding-bottom: 3px; border-bottom: 1px solid transparent;
+    transition: color .2s ease, border-color .2s ease;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{ color: var(--ink); border-bottom-color: var(--gold); }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background: var(--ink); color: var(--cream);
+    font-weight: 600; font-size: .9rem;
+    padding: 11px 20px; border-radius: 3px; border: 1px solid var(--ink);
+    text-decoration:none; cursor:pointer;
+    transition: transform .2s cubic-bezier(.22,.61,.36,1), background .2s ease, border-color .2s ease;
+  }
+  .btn:hover{ background: var(--gold-deep); border-color: var(--gold-deep); transform: translateY(-1px); }
+  .btn:focus-visible{ outline: 2px solid var(--gold); outline-offset: 2px; }
+  .btn.ghost{ background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .btn.ghost:hover{ border-color: var(--gold-deep); color: var(--gold-deep); background:transparent; }
+
+  .band{ padding-block: 88px; }
+  .band.tone-a{ background: var(--cream); }
+  .band.tone-b{ background: var(--cream-sunken); }
+  .band.espresso{ background: var(--espresso); color: var(--espresso-ink); }
+  .band.espresso h2, .band.espresso h3{ color: var(--espresso-ink); }
+  .band.espresso .eyebrow{ color: var(--gold); }
+  .band .section-head{ display:flex; flex-direction:column; gap:10px; margin-bottom:40px; }
+  .band .section-head h2{ font-size: clamp(1.8rem, 3vw, 2.4rem); }
+
+  .reveal{ opacity: 0; transform: translateY(22px); transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1); }
+  .reveal.in-view{ opacity: 1; transform: none; }
+  .reveal-group.in-view .reveal-item{ opacity: 1; transform: none; }
+  .reveal-item{ opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1); }
+  .reveal-item:nth-child(1){ transition-delay: .02s; }
+  .reveal-item:nth-child(2){ transition-delay: .09s; }
+  .reveal-item:nth-child(3){ transition-delay: .16s; }
+  .reveal-item:nth-child(4){ transition-delay: .23s; }
+  .reveal-item:nth-child(5){ transition-delay: .30s; }
+  .reveal-item:nth-child(6){ transition-delay: .37s; }
+
+  .hero-section{ padding-block: 64px 96px; }
+  .hero{ display:grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items:center; }
+  .hero h1{ font-size: clamp(2.6rem, 5vw, 4rem); line-height: 1.04; margin-top:14px; }
+  .hero h1 .script{ display:block; font-size: 1.5em; font-weight:600; color: var(--gold-deep); line-height:1; margin-top:6px; }
+  .hero p.lede{ margin-top: 22px; font-size: 1.08rem; color: var(--ink-soft); }
+  .hero .ctas{ display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; }
+  .hero .motif{ margin-top:36px; }
+  .hero-intro{ animation: rise .8s cubic-bezier(.22,.61,.36,1) both; }
+  .hero-visual{ animation: rise .9s .12s cubic-bezier(.22,.61,.36,1) both; }
+  @keyframes rise{ from{ opacity:0; transform: translateY(16px); } to{ opacity:1; transform:none; } }
+  @media (prefers-reduced-motion: reduce){ .hero-intro, .hero-visual{ animation: none; } }
+
+  .logo-card{
+    background: var(--cream-raised); border: 1px solid var(--line); border-radius: 4px; padding: 18px;
+    transform: rotate(2.2deg);
+    box-shadow: 0 18px 40px -22px hsl(var(--shadow) / .55), 0 2px 0 var(--line);
+    will-change: transform;
+  }
+  .logo-card img{ border-radius: 2px; }
+  .logo-card .cap{ margin-top: 12px; display:flex; justify-content:space-between; align-items:baseline; font-size: .78rem; color: var(--ink-soft); }
+
+  .storia{ display:grid; grid-template-columns: 1.3fr .9fr; gap: 56px; align-items:start; }
+  .storia p + p{ margin-top: 14px; }
+  .storia p{ color: var(--ink-soft); }
+  .facts{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  .facts li{ display:flex; justify-content:space-between; gap: 16px; padding-block: 14px; border-top: 1px solid var(--line); font-size: .95rem; }
+  .facts li:last-child{ border-bottom: 1px solid var(--line); }
+  .facts .k{ color: var(--ink-soft); }
+  .facts .v{ font-weight: 600; text-align:right; }
+
+  .menu-note{ margin-top:-18px; margin-bottom: 36px; }
+  .menu-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  .menu-card{
+    background: var(--cream-raised); border: 1px solid var(--line); border-radius: 4px;
+    padding: 26px 26px 10px; position: relative;
+    transition: transform .3s cubic-bezier(.22,.61,.36,1), box-shadow .3s ease;
+  }
+  .menu-card:hover{ transform: translateY(-4px); box-shadow: 0 20px 36px -26px hsl(var(--shadow) / .5); }
+  .menu-card .tag{
+    position:absolute; top:18px; right:18px;
+    font-size: .68rem; letter-spacing:.08em; text-transform:uppercase;
+    color: var(--ink-soft); border: 1px solid var(--line); border-radius: 100px; padding: 3px 10px;
+  }
+  .menu-card h3{ font-size: 1.3rem; padding-right: 90px; }
+  .menu-list{ list-style:none; margin: 18px 0 0; padding:0; }
+  .menu-list li{ display:flex; align-items:baseline; gap: 10px; padding-block: 12px; border-top: 1px solid var(--line); font-size: .96rem; }
+  .menu-list .name{ font-weight: 500; }
+  .menu-list .fill{ flex:1; border-bottom: 1px dotted var(--line); transform: translateY(-4px); }
+  .menu-list .price{ font-variant-numeric: tabular-nums; color: var(--ink-soft); white-space:nowrap; }
+
+  .prenota{ display:grid; grid-template-columns: .85fr 1.15fr; gap: 56px; }
+  .prenota .flow{ list-style:none; margin: 28px 0 0; padding:0; counter-reset: step; display:flex; flex-direction:column; gap:18px; }
+  .prenota .flow li{ display:flex; gap:14px; }
+  .prenota .flow li::before{
+    counter-increment: step; content: counter(step);
+    font-family:'Fraunces', serif; font-weight:600; color: var(--gold-deep);
+    width: 30px; height:30px; border: 1px solid var(--line); border-radius: 50%;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:.9rem;
+  }
+  .prenota .flow p{ margin:0; color: var(--ink-soft); font-size:.94rem; }
+  .prenota .flow strong{ color: var(--ink); display:block; font-size:.97rem; }
+
+  form{
+    background: var(--cream-raised); border: 1px solid var(--line); border-radius: 4px;
+    padding: 32px; display:grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+  .field{ display:flex; flex-direction:column; gap:7px; }
+  .field.full{ grid-column: 1 / -1; }
+  label{ font-size:.82rem; font-weight:600; color: var(--ink-soft); }
+  input, textarea, select{
+    font: inherit; font-size: .95rem;
+    background: var(--cream); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 3px; padding: 11px 12px;
+    transition: border-color .2s ease;
+  }
+  input:focus-visible, textarea:focus-visible, select:focus-visible{ outline: 2px solid var(--gold); outline-offset: 1px; border-color: var(--gold); }
+  textarea{ resize: vertical; min-height: 84px; }
+  .form-foot{ grid-column: 1/-1; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-top:6px; }
+  .form-hint{ font-size: .78rem; color: var(--ink-soft); max-width: 46ch; }
+  .confirm{
+    grid-column: 1/-1; display:none;
+    border: 1px dashed var(--pine); border-radius: 4px; padding: 18px 20px;
+    background: color-mix(in srgb, var(--pine) 10%, var(--cream-raised));
+  }
+  .confirm.show{ display:block; animation: rise .5s cubic-bezier(.22,.61,.36,1) both; }
+  .confirm strong{ display:block; font-family:'Fraunces', serif; font-size:1.05rem; margin-bottom:4px; }
+  .confirm p{ margin:0; color: var(--ink-soft); font-size:.9rem; }
+
+  .gallery{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .tile{
+    aspect-ratio: 4/5; border-radius: 4px; border: 1px solid var(--line);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+    color: var(--ink-soft); position:relative; overflow:hidden;
+    transition: transform .3s cubic-bezier(.22,.61,.36,1);
+  }
+  .tile:hover{ transform: translateY(-3px); }
+  .tile span{ font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; }
+  .tile small{ font-size:.72rem; opacity:.75; }
+  .tile.t1{ background: linear-gradient(155deg, color-mix(in srgb, var(--pine) 22%, var(--cream-raised)), var(--cream-raised)); }
+  .tile.t2{ background: linear-gradient(155deg, color-mix(in srgb, var(--gold) 26%, var(--cream-raised)), var(--cream-raised)); }
+  .tile.t3{ background: linear-gradient(155deg, color-mix(in srgb, var(--wine) 20%, var(--cream-raised)), var(--cream-raised)); }
+  .tile.t4{ background: linear-gradient(155deg, color-mix(in srgb, var(--gold) 16%, var(--cream-raised)), var(--cream-raised)); }
+  .tile.t5{ background: linear-gradient(155deg, color-mix(in srgb, var(--pine) 16%, var(--cream-raised)), var(--cream-raised)); }
+  .tile.t6{ background: linear-gradient(155deg, color-mix(in srgb, var(--wine) 14%, var(--cream-raised)), var(--cream-raised)); }
+
+  .standort{ display:grid; grid-template-columns: .85fr 1.15fr; gap: 56px; align-items:center; }
+  .standort p{ color: var(--ink-soft); }
+  .standort .addr{ margin-top: 18px; font-size: 1.05rem; color: var(--ink); }
+  .standort .addr strong{ display:block; font-weight:600; }
+  .standort .ctas{ display:flex; gap:14px; margin-top:28px; flex-wrap:wrap; }
+  .map-card{
+    border: 1px solid var(--line); border-radius: 4px; overflow:hidden;
+    box-shadow: 0 18px 40px -24px hsl(var(--shadow) / .5);
+  }
+  .map-card iframe{ width:100%; height: 360px; border:0; display:block; filter: saturate(.9) contrast(1.02); }
+
+  footer{ padding-block: 56px 48px; }
+  .foot-grid{ display:grid; grid-template-columns: 1.1fr .9fr .9fr; gap: 40px; }
+  footer h3{ font-size:1rem; font-family:'Figtree',sans-serif; font-weight:700; margin-bottom:14px; }
+  footer p{ font-style:normal; color: var(--espresso-soft); font-size:.92rem; margin:0 0 6px; }
+  footer a.pending, footer p.pending{ color: var(--gold); font-style: italic; }
+  footer a{ text-decoration: none; }
+  footer a.link{ color: var(--espresso-ink); text-decoration: underline; text-decoration-color: var(--espresso-line); text-underline-offset: 3px; }
+  footer a.link:hover{ text-decoration-color: var(--gold); }
+  .foot-bottom{
+    margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--espresso-line);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+    font-size:.82rem; color: var(--espresso-soft);
+  }
+
+  @media (max-width: 760px){
+    .hero{ grid-template-columns: 1fr; gap: 40px; }
+    .hero .logo-card{ justify-self:start; max-width: 320px; }
+    .storia, .prenota, .standort{ grid-template-columns: 1fr; }
+    .standort .map-card{ order: -1; }
+    .menu-grid{ grid-template-columns: 1fr; }
+    .gallery{ grid-template-columns: repeat(2, 1fr); }
+    form{ grid-template-columns: 1fr; }
+    .foot-grid{ grid-template-columns: 1fr; gap: 28px; }
+    .band{ padding-block: 64px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition: none !important; animation: none !important; }
+    .reveal, .reveal-item{ opacity: 1 !important; transform: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="wrap nav">
+    <div class="wordmark">café <em>da Noi</em></div>
+    <ul class="navlinks">
+      <li><a href="#storia">Über uns</a></li>
+      <li><a href="#cucina">Speisekarte</a></li>
+      <li><a href="#prenota">Reservierung</a></li>
+      <li><a href="#standort">Kontakt</a></li>
+    </ul>
+    <a class="btn" href="#prenota">Tisch reservieren</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="band tone-a hero-section">
+    <div class="wrap hero">
+      <div class="hero-intro">
+        <p class="eyebrow">Trattoria &amp; Caffè · Tino e Toni</p>
+        <h1>Willkommen bei uns<span class="script">Buongiorno!</span></h1>
+        <p class="lede measure">Café Da Noi ist der Ort, an dem italienischer Espresso, hausgemachte Dolci und ein bisschen Dolce Vita auf unsere Nachbarschaft treffen. Geführt von Tino und Toni — mit Herz, wie zu Hause.</p>
+        <div class="ctas">
+          <a class="btn" href="#prenota">Tisch reservieren</a>
+          <a class="btn ghost" href="#cucina">Speisekarte ansehen</a>
+        </div>
+        <div class="motif" aria-hidden="true">
+          <span class="bar pine"></span><span class="mark">♥</span><span class="bar wine"></span>
+        </div>
+      </div>
+      <div class="logo-card hero-visual" id="logo-card">
+        <img src="public/assets/logo/IMG_3392.jpg" alt="Café Da Noi Logo, Tino e Toni" width="483" height="391">
+        <div class="cap"><span>Café Da Noi</span><span>Tino e Toni</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tone-b" id="storia">
+    <div class="wrap storia">
+      <div class="reveal" data-reveal>
+        <p class="eyebrow">La nostra storia</p>
+        <h2 style="margin-top:10px;">Zwei Namen, eine Küche</h2>
+        <p class="measure" style="margin-top:20px;">Tino und Toni haben sich einen Traum erfüllt: ein Café, das sich anfühlt wie der Besuch bei der italienischen Verwandtschaft. Kurzer Espresso, lange Gespräche, und immer ein Dolce mehr, als man bestellt hat.</p>
+        <p class="measure">Ob zum schnellen Caffè vor der Arbeit oder zum ausgedehnten Aperitivo am Abend — bei uns ist für jede Tageszeit ein Platz gedeckt.</p>
+      </div>
+      <ul class="facts reveal" data-reveal>
+        <li><span class="k">Inhaber</span><span class="v">Tino &amp; Toni</span></li>
+        <li><span class="k">Konzept</span><span class="v">Italienisches Café &amp; Trattoria</span></li>
+        <li><span class="k">Herzstück</span><span class="v">Espresso &amp; hausgemachte Dolci</span></li>
+        <li><span class="k">Reservierung</span><span class="v">Online, mit persönlicher Bestätigung</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band tone-a" id="cucina">
+    <div class="wrap">
+      <div class="section-head reveal" data-reveal>
+        <p class="eyebrow">Dalla nostra cucina</p>
+        <h2>Was uns schmeckt</h2>
+      </div>
+      <p class="measure menu-note reveal" data-reveal>Diese Auswahl ist ein Platzhalter — sobald die echte Speisekarte vorliegt, ersetzen wir Kategorien und Preise 1:1.</p>
+      <div class="menu-grid reveal-group" data-reveal-group>
+        <div class="menu-card reveal-item">
+          <span class="tag">Beispiel</span>
+          <h3>Caffè &amp; Bevande</h3>
+          <ul class="menu-list">
+            <li><span class="name">Espresso</span><span class="fill"></span><span class="price">2,20 €</span></li>
+            <li><span class="name">Cappuccino</span><span class="fill"></span><span class="price">3,20 €</span></li>
+            <li><span class="name">Caffè Latte</span><span class="fill"></span><span class="price">3,50 €</span></li>
+          </ul>
+        </div>
+        <div class="menu-card reveal-item">
+          <span class="tag">Beispiel</span>
+          <h3>Dolci</h3>
+          <ul class="menu-list">
+            <li><span class="name">Tiramisù della casa</span><span class="fill"></span><span class="price">4,50 €</span></li>
+            <li><span class="name">Cornetto</span><span class="fill"></span><span class="price">2,80 €</span></li>
+            <li><span class="name">Panna Cotta</span><span class="fill"></span><span class="price">4,00 €</span></li>
+          </ul>
+        </div>
+        <div class="menu-card reveal-item">
+          <span class="tag">Beispiel</span>
+          <h3>Panini &amp; Piatti</h3>
+          <ul class="menu-list">
+            <li><span class="name">Panino Caprese</span><span class="fill"></span><span class="price">6,50 €</span></li>
+            <li><span class="name">Bruschetta al Pomodoro</span><span class="fill"></span><span class="price">5,50 €</span></li>
+            <li><span class="name">Insalata Mista</span><span class="fill"></span><span class="price">7,00 €</span></li>
+          </ul>
+        </div>
+        <div class="menu-card reveal-item">
+          <span class="tag">Beispiel</span>
+          <h3>Aperitivo</h3>
+          <ul class="menu-list">
+            <li><span class="name">Aperol Spritz</span><span class="fill"></span><span class="price">6,00 €</span></li>
+            <li><span class="name">Hugo</span><span class="fill"></span><span class="price">6,00 €</span></li>
+            <li><span class="name">Prosecco</span><span class="fill"></span><span class="price">4,50 €</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tone-b" id="prenota">
+    <div class="wrap prenota">
+      <div class="reveal" data-reveal>
+        <p class="eyebrow">Prenota un tavolo</p>
+        <h2 style="margin-top:10px;">Tisch reservieren</h2>
+        <p class="measure" style="margin-top:16px; color:var(--ink-soft);">So läuft deine Reservierung ab:</p>
+        <ol class="flow">
+          <li><div><strong>Anfrage senden</strong><p>Du füllst das Formular mit Wunschtermin und Personenzahl aus.</p></div></li>
+          <li><div><strong>Persönliche Prüfung</strong><p>Tino oder Toni bestätigen deinen Tisch von Hand.</p></div></li>
+          <li><div><strong>Bestätigung per E-Mail</strong><p>Du erhältst eine Mail, sobald der Tisch für dich reserviert ist.</p></div></li>
+        </ol>
+      </div>
+
+      <form id="reservation-form" class="reveal" data-reveal>
+        <div class="field">
+          <label for="r-name">Name</label>
+          <input id="r-name" name="name" type="text" placeholder="Vor- und Nachname" required>
+        </div>
+        <div class="field">
+          <label for="r-email">E-Mail</label>
+          <input id="r-email" name="email" type="email" placeholder="du@beispiel.de" required>
+        </div>
+        <div class="field">
+          <label for="r-guests">Personenanzahl</label>
+          <input id="r-guests" name="guests" type="number" min="1" max="20" placeholder="2" required>
+        </div>
+        <div class="field">
+          <label for="r-phone">Telefon (optional)</label>
+          <input id="r-phone" name="phone" type="tel" placeholder="Für Rückfragen">
+        </div>
+        <div class="field">
+          <label for="r-date">Datum</label>
+          <input id="r-date" name="date" type="date" required>
+        </div>
+        <div class="field">
+          <label for="r-time">Uhrzeit</label>
+          <input id="r-time" name="time" type="time" required>
+        </div>
+        <div class="field full">
+          <label for="r-note">Anmerkungen</label>
+          <textarea id="r-note" name="note" placeholder="z. B. Geburtstag, Hochstuhl, Allergien"></textarea>
+        </div>
+        <div class="form-foot">
+          <p class="form-hint">Hinweis: Die Anfrage wird aktuell noch nicht technisch verarbeitet — das folgt mit der Anbindung des Bestätigungs-Workflows.</p>
+          <button type="submit" class="btn">Anfrage senden</button>
+        </div>
+        <div class="confirm" id="r-confirm">
+          <strong>Grazie! Deine Anfrage ist unterwegs.</strong>
+          <p>Tino oder Toni bestätigen deine Reservierung in Kürze per E-Mail.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="band tone-a" id="galleria">
+    <div class="wrap">
+      <div class="section-head reveal" data-reveal>
+        <p class="eyebrow">Impressioni</p>
+        <h2>Ein Blick bei uns</h2>
+      </div>
+      <div class="gallery reveal-group" data-reveal-group>
+        <div class="tile t1 reveal-item"><span>Innenraum</span><small>Foto folgt</small></div>
+        <div class="tile t2 reveal-item"><span>Espresso</span><small>Foto folgt</small></div>
+        <div class="tile t3 reveal-item"><span>Dolci</span><small>Foto folgt</small></div>
+        <div class="tile t4 reveal-item"><span>Terrasse</span><small>Foto folgt</small></div>
+        <div class="tile t5 reveal-item"><span>Tino &amp; Toni</span><small>Foto folgt</small></div>
+        <div class="tile t6 reveal-item"><span>Buongiorno</span><small>Foto folgt</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tone-b" id="standort">
+    <div class="wrap standort">
+      <div class="reveal" data-reveal>
+        <p class="eyebrow">Dove siamo</p>
+        <h2 style="margin-top:10px;">So findest du uns</h2>
+        <p class="measure" style="margin-top:16px;">Mitten im Kiez, nur ein paar Schritte vom Alltag entfernt — folg einfach dem Espressoduft.</p>
+        <p class="addr">
+          <strong>Café Da Noi</strong>
+          Glißmannweg 5<br>22457 Hamburg
+        </p>
+        <div class="ctas">
+          <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Gli%C3%9Fmannweg%205%2C%2022457%20Hamburg" target="_blank" rel="noopener">Route planen</a>
+          <a class="btn ghost" href="https://www.google.com/maps/search/?api=query&query=Gli%C3%9Fmannweg%205%2C%2022457%20Hamburg" target="_blank" rel="noopener">In Google Maps öffnen</a>
+        </div>
+      </div>
+      <div class="map-card reveal" data-reveal>
+        <iframe
+          src="https://www.google.com/maps?q=Gli%C3%9Fmannweg+5,+22457+Hamburg&output=embed"
+          title="Café Da Noi auf Google Maps – Glißmannweg 5, 22457 Hamburg"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="footer" class="band espresso">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h3>Café Da Noi</h3>
+        <p>Tino e Toni</p>
+        <p>Glißmannweg 5<br>22457 Hamburg</p>
+        <a class="link" href="https://www.google.com/maps/search/?api=query&query=Gli%C3%9Fmannweg%205%2C%2022457%20Hamburg" target="_blank" rel="noopener">Route &amp; Karte</a>
+      </div>
+      <div>
+        <h3>Öffnungszeiten</h3>
+        <p class="pending">Öffnungszeiten folgen</p>
+      </div>
+      <div>
+        <h3>Kontakt</h3>
+        <p class="pending">Telefon folgt</p>
+        <p class="pending">E-Mail folgt</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Café Da Noi · Tino e Toni</span>
+      <div class="motif on-dark" aria-hidden="true">
+        <span class="bar pine" style="width:28px;"></span><span class="mark">♥</span><span class="bar wine" style="width:28px;"></span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var header = document.getElementById('site-header');
+    var onScroll = function(){
+      header.classList.toggle('scrolled', window.scrollY > 4);
+    };
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    var form = document.getElementById('reservation-form');
+    var confirmEl = document.getElementById('r-confirm');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      confirmEl.classList.add('show');
+      confirmEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+      document.querySelectorAll('[data-reveal]').forEach(function(el){ el.classList.add('reveal'); });
+      document.querySelectorAll('[data-reveal-group]').forEach(function(el){ el.classList.add('reveal-group'); });
+
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+      document.querySelectorAll('[data-reveal], [data-reveal-group]').forEach(function(el){ io.observe(el); });
+
+      var card = document.getElementById('logo-card');
+      var ticking = false;
+      window.addEventListener('scroll', function(){
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function(){
+          var y = Math.min(window.scrollY, 600) * -0.05;
+          card.style.transform = 'rotate(2.2deg) translateY(' + y + 'px)';
+          ticking = false;
+        });
+      }, { passive: true });
+    }
+  })();
+</script>
+
+</body>
+</html>
